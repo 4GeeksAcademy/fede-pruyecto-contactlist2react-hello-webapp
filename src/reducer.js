@@ -1,8 +1,9 @@
-export const initialState = {
-    contacts: [],
+export const initialState= ()=> {
+    return {contacts: [],}
 };
 
-export const reducer = (state, action) => {
+const reducer = (state, action) => {
+
     switch (action.type) {
         case "load_contact": // Aunque ahora la carga inicial se hará directamente
             return {
@@ -15,7 +16,7 @@ export const reducer = (state, action) => {
                 contacts: state.contacts.filter(
                     (contact) => contact.id !== action.payload.id
                 ),
-            };
+            };;
         case "add_contact":
             return {
                 ...state,
@@ -33,4 +34,7 @@ export const reducer = (state, action) => {
         default:
             return state;
     }
+
 };
+
+export default reducer;

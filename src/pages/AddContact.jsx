@@ -1,9 +1,10 @@
 import { Link, useParams } from "react-router-dom"
-import { useState } from "react";
+import { useEffect, useState, useReducer } from "react";
 import { addContact as createContact } from "../functions";
-
+import useGlobalReducer from "../hooks/useGlobalReducer";
 
 export const AddContact = ()=> {
+    const {state, dispatch} = useGlobalReducer();
     const [formData, setFormData] = useState({
         name: "",
         phone: "",
@@ -11,6 +12,15 @@ export const AddContact = ()=> {
         address: "",
       });
     const {id} = useParams();
+    console.log(formData);
+
+    useEffect(() => {
+        if (id) {
+            const currrentContact= state.contacts.find(contact => contact.id == id)
+            setFormData(currrentContact)
+        }
+    }, [])
+
 
     const handleChange = (e) => {
     const { name, value } = e.target;

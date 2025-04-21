@@ -1,12 +1,12 @@
 import { useEffect, useReducer } from "react";
-import { initialState, reducer } from "../reducer";
 import { refreshContacts as fetchContacts, deleteContact as removeContact } from "../functions";
 import { Link } from "react-router-dom";
+import useGlobalReducer from "../hooks/useGlobalReducer";
 
 
 
 export const ContactsList = () => {
-    const [state, dispatch] = useReducer(reducer, initialState);
+    const {state, dispatch} = useGlobalReducer();
     const { contacts } = state;
 
     const loadInitialContacts = async () => {
